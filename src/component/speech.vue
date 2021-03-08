@@ -71,7 +71,7 @@ export default {
   },
 
   mounted () {
-    this.checkApi()
+    // this.checkApi()
   },
   watch : {
     resume :function (val) {
