@@ -13,6 +13,9 @@ export default {
     lang: {
       type: String,
       default: 'en-US'
+    },
+    resume : {
+      default : 0
     }
   },
 
@@ -38,6 +41,7 @@ export default {
       recognition.lang = this.lang
       recognition.interimResults = true
 
+      recognition.start();
       recognition.addEventListener('result', event => {
         const text = Array.from(event.results)
           .map(result => result[0])
@@ -59,15 +63,22 @@ export default {
 
         this.runtimeTranscription = ''
 
-        recognition.start()
+        recognition.stop()
       })
 
-      recognition.start()
+      // recognition.start()
     }
   },
 
   mounted () {
     this.checkApi()
+  },
+  watch : {
+    resume :function (val) {
+      if (val){
+        this.checkApi();
+      }
+    }
   }
 }
 </script>
